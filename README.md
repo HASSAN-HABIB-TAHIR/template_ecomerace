@@ -1,6 +1,6 @@
 # Creating a cloning Ali-Baba Application in React js 
 
-Read the step-by-step guide here: https://blog.logrocket.com/creating-multilevel-dropdown-menu-react/
+
 
 ## Demo here:
 
