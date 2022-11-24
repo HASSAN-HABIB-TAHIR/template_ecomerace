@@ -29,8 +29,9 @@ const Cart = () => {
           </Box>
           <br></br>
 
-
-          {context.state.cart.map((book) => (
+    <Box sx={{backgroundColor:"white"}}>
+          {
+            context.state.cart.map((book) => (
             <div className="book" key={book.id}>
               <img src={book.pic} alt={book.name} />
               <div>
@@ -48,8 +49,10 @@ const Cart = () => {
               </div>
             </div>
           ))}
-
+          </Box>
+                <Box sx={{backgroundColor:"white",marginBottom:"20px",padding:"30px"}}>
           <h3>Total Cart Amount  ( {totalCartAmount} ) R.s </h3>
+          </Box>
         </Box>
       </Container>
     </>

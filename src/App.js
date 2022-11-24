@@ -27,7 +27,7 @@ const App = () => {
       <Navbar />
       <Layout />
       <Routes>
-        <Route path="/" element={  <><Slick /><ProductsArrival/> </>} />
+        <Route path="/" element={  <><Slick />  <ProductsArrival/> </>} />
         <Route path="about" element={<About />} />
         <Route path="services" element={<Services />} />
         <Route path="web-design" element={<WebDesign />} />

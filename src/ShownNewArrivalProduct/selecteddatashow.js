@@ -6,33 +6,57 @@ import { Container } from '@mui/material';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './index1.css'
+// import './index1.css'
+import './indexZoom.css'
 import { products } from './dataofproductArrival.js';
 import { Link } from "react-router-dom";
-
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
 import { BooksContext } from "../AddtoCartFunctionaltity/ContextApi";
+import ReactImageMagnify from 'react-image-magnify';
+import downlaod from "./images/download.png"
+import download2 from "./images/download2.png"
+import download3 from "./images/download3.png"
+import download4 from "./images/download4.png"
+import download7 from "./images/download7.png"
 
 
 function SelectedDataShow() {
+    const images = [
+        downlaod,
+        download2,
+        download3,
+        download4,
+        download7,
+        // product.pic,
+        // product.pic1,
+        // product.pic2,
+        // product.pic3,
+    ];
 
+    const [img21, setImg21] = useState(images[0]);
+    const hoverHandler = (image, i) => {
+        setImg21(image);
+        refs.current[i].classList.add('active');
+        for (var j = 0; j < images.length; j++) {
+            if (i !== j) {
+                refs.current[j].classList.remove('active');
+            }
+        }
+    };
+
+    const refs = useRef([]);
+    refs.current = [];
+    const addRefs = (el) => {
+        if (el && !refs.current.includes(el)) {
+            refs.current.push(el);
+        }
+    };
     const context = useContext(BooksContext);
-
     const totalCartCount = context.state.cart.reduce(
         (total, book) => (total),
         0
     );
-
-
-    // const [addToCart] =useContext(CartContext)
     const [product, setProducts] = useState({ products })
     const { id } = useParams()
-
-
 
     useEffect(() => {
         getProduct()
@@ -43,277 +67,76 @@ function SelectedDataShow() {
         setProducts(newProduct)
     }
 
-    const [defaultImage, setDefaultImage] = useState({});
-    const [img, setImg] = useState(product[0]);
+    // const [defaultImage, setDefaultImage] = useState({});
+    // const [img, setImg] = useState(product[0]);
 
-    var settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        initialSlide: 0,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
-    console.log("product ",product );
     return (
         <>
             <Container>
-              <div><h2 >Product Description </h2></div>
-              <br></br>
+                <h2 >Product Description </h2>
+                <br></br>
 
-                <div><h3 >{product.name}</h3></div>
+                <h3 >{product.name}</h3>
                 <br></br>
                 <Box>
-                    <Slider {...settings}>
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
 
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
+                    <Box sx={{
+                        maxWidth: "1200px",
+                        margin: " 0 auto",
+                        display: "grid",
+                        gridtemplateColumns: "repeat(2, 1fr)"
+                    }}>
+
+                        <Box sx={{
+                            display: "flex",
+                            height: " 50vh"
+                        }}>
+                            <Box sx={{
+                                display: " flex",
+                                flexDirection: "column",
+                                gap: "10px"
+                            }}>
+                                {images.map((image, i) => (
+                                    <div
+                                        className={i == 0 ? 'img_wrap active' : 'img_wrap'}
+                                        key={i}
+                                        onMouseOver={() => hoverHandler(image, i)}
+                                        ref={addRefs}
+                                    >
+                                        <img src={image} alt="image" />
+                                    </div>
+                                ))}
+                            </Box>
+
+
+                            <Box >
+                                <ReactImageMagnify
+                                    {...{
+                                        smallImage: {
+                                            alt: 'Wristwatch by Ted Baker London',
+                                            isFluidWidth: true,
+                                            src: img21,
+                                        },
+                                        largeImage: {
+                                            src: img21,
+                                            width: 1200,
+                                            height: 1800,
+                                        },
+                                        enlargedImageContainerDimensions: {
+                                            width: '150%',
+                                            height: '150%',
+                                        },
                                     }}
-                                    img src={product.pic}
                                 />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
-
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
-
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
-                                    }}
-                                    img src={product.pic1}
-                                />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
-
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
-
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
-                                    }}
-                                    img src={product.pic2}
-                                />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
-
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
-
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
-                                    }}
-                                    img src={product.pic3}
-                                />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
+                            </Box>
+                        </Box>
+                        <div className="right"></div>
+                    </Box>
 
 
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
-
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
-                                    }}
-                                    img src={product.pic4}
-                                />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
-
-
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
-
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
-                                    }}
-                                    img src={product.pic1}
-                                />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
-
-
-                        <Card sx={{ maxWidth: 345, }}>
-                            <CardActionArea>
-                                <CardMedia
-
-                                    component="img"
-                                    height="140"
-                                    alt="green iguana"
-                                    sx={{
-                                        width: "50%", marginLeft: "70px", marginTop: "20px",
-                                        "&:hover": { transform: "scale(1.5)" }
-                                    }}
-                                    img src={product.pic2}
-                                />
-
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {product.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-
-                                        <h5> {product.fulldesc}</h5>
-
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Slider>
                 </Box>
-
-
+                
+               
                 {context.state.booklist.map((book) => {
 
                 })}
@@ -321,9 +144,6 @@ function SelectedDataShow() {
                     <Box sx={{ textAlign: "center", fontSize: "40px", textDecoration: 'none' }}>
                         <Button variant="contained"
                             onClick={() => context.addToCart(product)}>Add to Cart</Button>
-                            
-
-
                     </Box>
                 </Link>
             </Container>

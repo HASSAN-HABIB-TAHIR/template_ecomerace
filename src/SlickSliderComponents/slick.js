@@ -28,7 +28,7 @@ function Slick() {
     <>
 
       <Box>
-        <Container >
+        <Container maxWidth="xl">
           <Box sx={{ background: "#fff", marginTop: "20px" }}>
 
             <Grid container spacing={1}>
@@ -44,16 +44,16 @@ function Slick() {
 
                     <Slider {...settings}>
                       <div>
-                        <img style={{ width: "100%", height: "55vh" }} src={factory} />
+                        <img style={{ width: "100%", height: "50vh" }} src={factory} />
                       </div>
                       <div>
-                        <img style={{ width: "100%", height: "55vh" }} src={popular} />
+                        <img style={{ width: "100%", height: "50vh" }} src={popular} />
                       </div>
                       <div>
-                        <img style={{ width: "100%", height: "55vh" }} src={southkorea} />
+                        <img style={{ width: "100%", height: "50vh" }} src={southkorea} />
                       </div>
                       <div>
-                        <img style={{ width: "100%", height: "55vh" }} src={us} />
+                        <img style={{ width: "100%", height: "50vh" }} src={us} />
                       </div>
 
                     </Slider>
