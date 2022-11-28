@@ -11,7 +11,7 @@
 You can download or clone this project by running this command from your terminal:
 
 ```
-git clone https://github.com/Ibaslogic/react-multilevel-dropdown-menu
+
 ```
 
 Then:
