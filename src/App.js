@@ -38,8 +38,6 @@ const App = () => {
         <Route path="php" element={<PHP />} />
         <Route path="who-we-are" element={<AboutWho />} />
         <Route path="our-values" element={<OurValues />} />
-
-
         <Route path="/details/:id" element={<SelectedDataShow />} />
         <Route path="/addtocartdata" element={<Ui />} />
         <Route path="/products" element={<Products />} />

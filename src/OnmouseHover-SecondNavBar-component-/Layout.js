@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
+import { Box } from '@mui/material';
 
 const Layout = () => {
   return (
     <div>
       <Header />
-      <div className="content">
+      <Box sx={{marginTop:"40px"}}>
         <Outlet />
-      </div>
+        </Box>
     </div>
   );
 };

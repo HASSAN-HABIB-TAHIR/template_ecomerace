@@ -29,7 +29,7 @@ function Slick() {
 
       <Box>
         <Container maxWidth="xl">
-          <Box sx={{ background: "#fff", marginTop: "20px" }}>
+          <Box sx={{ background: "#fff" }}>
 
             <Grid container spacing={1}>
 
